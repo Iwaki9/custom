@@ -4,30 +4,34 @@
 
 import sys
 import os
+import threading
+import subprocess
+import json
+import re
+from pathlib import Path
+from datetime import datetime
+
+# Глобальные импорты с обработкой ошибок
+try:
+    import ttkbootstrap as ttkb
+    from ttkbootstrap.constants import *
+    USE_TTKBOOTSTRAP = True
+except ImportError:
+    USE_TTKBOOTSTRAP = False
+    print("⚠️ ttkbootstrap не установлен. Запуск в стандартном режиме.")
+    print("   Для современного дизайна: pip install ttkbootstrap")
+
+try:
+    import tkinter.dnd as tkdnd
+    USE_DND = True
+except ImportError:
+    USE_DND = False
+
+import tkinter as tk
+from tkinter import ttk, filedialog, messagebox, scrolledtext
 
 def launch_enhanced_gui():
     """Запуск улучшенного GUI с современным дизайном"""
-    
-    # Попытка импорта современных библиотек
-    try:
-        import ttkbootstrap as ttkb
-        from ttkbootstrap.constants import *
-        USE_TTKBOOTSTRAP = True
-    except ImportError:
-        USE_TTKBOOTSTRAP = False
-        print("⚠️ ttkbootstrap не установлен. Запуск в стандартном режиме.")
-        print("   Для современного дизайна: pip install ttkbootstrap")
-    
-    try:
-        import tkinter.dnd as tkdnd
-        USE_DND = True
-    except ImportError:
-        USE_DND = False
-    
-    import tkinter as tk
-    from tkinter import ttk, filedialog, messagebox, scrolledtext
-    import threading
-    import subprocess
     import json
     
     class EnhancedApp:
